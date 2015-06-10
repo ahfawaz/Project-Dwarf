@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{0d67c490-1ae6-4624-9160-3cbc2dd482e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application">
+      <UniqueIdentifier>{d15d6ba1-5d9c-4094-a73b-688701e1c4af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Object Manager">
+      <UniqueIdentifier>{bc01799f-fe3e-485e-88e2-5c972a199da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level Manager">
+      <UniqueIdentifier>{c1654310-dd71-4f86-988b-3bb4fcc54d87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Asset Manager">
+      <UniqueIdentifier>{7209cab6-2d23-46c2-817d-6df98a208af0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Logic">
+      <UniqueIdentifier>{92b72751-228c-40d4-add3-f6f726d4261a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object Manager\Components">
+      <UniqueIdentifier>{eca67fc9-ab90-40f4-a703-cfcd3e9d5005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object Manager\Main Components">
+      <UniqueIdentifier>{9a016d49-9ccd-4faf-92fe-c8ed108a4ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{7d52f33b-4e2d-4119-9221-7722c275a254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{fd48f534-d081-4b26-ab06-2d3da572bc96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Shaders">
+      <UniqueIdentifier>{957b58cb-4908-4db0-b9d4-655fa68d4245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Shaders\Geometry Shaders">
+      <UniqueIdentifier>{c885a5b2-ca08-4778-84a9-a547117abd36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Shaders\Pixel Shaders">
+      <UniqueIdentifier>{ef76a374-3fb8-4d2b-a111-18c11e8db7a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Shaders\Vertex Shaders">
+      <UniqueIdentifier>{d41da34f-6048-4558-9eee-c336630c7e86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Shaders\Compute Shaders">
+      <UniqueIdentifier>{e4728887-ee31-4f95-9674-87bf30d2ae58}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source Code\Application\Resource.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Application\stdafx.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Application\targetver.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Application\WinMain.h">
+      <Filter>Application</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Asset Manager\AssetManager.h">
+      <Filter>Asset Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Asset Manager\DDSTextureLoader.h">
+      <Filter>Asset Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Asset Manager\Mesh.h">
+      <Filter>Asset Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Level Manager\LevelManager.h">
+      <Filter>Level Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Components\RenderComponent.h">
+      <Filter>Object Manager\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Components\TestingComponent.h">
+      <Filter>Object Manager\Main Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Components\Component.h">
+      <Filter>Object Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Object Manager\GameObject.h">
+      <Filter>Object Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Object Manager\ObjectManager.h">
+      <Filter>Object Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Core\Core.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\BlendStateManager.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\CameraManager.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\ComputeManager.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\ConstantBufferManager.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\ContextManager.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\DepthStencilStateManager.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\RenderController.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\RenderMain.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\ShaderManager.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\Shaders\VertexBuffers.h">
+      <Filter>Renderer\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\Shaders\BufferDefines.h">
+      <Filter>Renderer\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\Shaders\ConstantBuffers.h">
+      <Filter>Renderer\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Renderer\Shaders\PixelBuffers.h">
+      <Filter>Renderer\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Utilities\ErrorChecking.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Utilities\TimeManager.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Utilities\Util.h">
+      <Filter>Utilities</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source Code\Application\stdafx.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Application\WinMain.cpp">
+      <Filter>Application</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Asset Manager\AssetManager.cpp">
+      <Filter>Asset Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Asset Manager\DDSTextureLoader.cpp">
+      <Filter>Asset Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Asset Manager\Mesh.cpp">
+      <Filter>Asset Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Level Manager\LevelManager.cpp">
+      <Filter>Level Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Components\RenderComponent.cpp">
+      <Filter>Object Manager\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Components\TestingComponent.cpp">
+      <Filter>Object Manager\Main Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Object Manager\GameObject.cpp">
+      <Filter>Object Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Object Manager\ObjectManager.cpp">
+      <Filter>Object Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Core\Core.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Renderer\BlendStateManager.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Renderer\CameraManager.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Renderer\ComputeManager.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Renderer\ConstantBufferManager.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Renderer\ContextManager.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Renderer\DepthStencilStateManager.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Renderer\RenderController.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Renderer\RenderMain.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Renderer\ShaderManager.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Utilities\ErrorChecking.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Utilities\TimeManager.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Utilities\Util.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Source Code\Application\small.ico">
+      <Filter>Application\Resource Files</Filter>
+    </Image>
+    <Image Include="Source Code\Application\Source.ico">
+      <Filter>Application\Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Source Code\Application\Source.rc">
+      <Filter>Application\Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source Code\Application\Source.aps">
+      <Filter>Application\Resource Files</Filter>
+    </None>
+    <None Include="Source Code\Renderer\Shaders\CommonFunctions.hlsli">
+      <Filter>Renderer\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Source Code\Renderer\Shaders\Vertex Shaders\EmptyVertex.hlsl">
+      <Filter>Renderer\Shaders\Vertex Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Source Code\Renderer\Shaders\Vertex Shaders\StaticVertUsingTangents.hlsl">
+      <Filter>Renderer\Shaders\Vertex Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Source Code\Renderer\Shaders\Vertex Shaders\StaticVertsUsingNoTangents.hlsl">
+      <Filter>Renderer\Shaders\Vertex Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Source Code\Renderer\Shaders\Pixel Shaders\BasicPixelShader.hlsl">
+      <Filter>Renderer\Shaders\Pixel Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Source Code\Renderer\Shaders\Pixel Shaders\TexturePixelShader.hlsl">
+      <Filter>Renderer\Shaders\Pixel Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
