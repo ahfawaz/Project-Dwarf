@@ -31,30 +31,35 @@ void TestComponent::UpdateComponent()
 		XMMATRIX pos_mat = XMLoadFloat4x4(&m_fPosMatrix);
 		XMMATRIX rot_mat = XMLoadFloat4x4(&m_fRotMatrix);
 
-		if (GetAsyncKeyState(VK_RIGHT))
-		{
-			change = true;
-			rotation = XMMatrixRotationY(XMConvertToRadians(45.0f) * CTimeManager::GetTimeDelta());
-		}
-		if (GetAsyncKeyState(VK_LEFT))
-		{
-			change = true;
-			rotation = XMMatrixRotationY(XMConvertToRadians(-45.0f) * CTimeManager::GetTimeDelta());
-		}
-		if (GetAsyncKeyState(VK_UP))
-		{
-			change = true;
-			translation = XMMatrixTranslation(0, 0, -5.0f * CTimeManager::GetTimeDelta());
-		}
-		if (GetAsyncKeyState(VK_DOWN))
-		{
-			change = true;
-			translation = XMMatrixTranslation(0, 0, 5.0f * CTimeManager::GetTimeDelta());
-		}
-		if (GetAsyncKeyState('P'))
-		{
-			XMStoreFloat4x4(&GetOwner()->GetWorldMat(), XMMatrixIdentity());
-		}
+		////Move this model within the game space
+		//if (GetAsyncKeyState(VK_RIGHT))
+		//{
+		//	change = true;
+		//	rotation = XMMatrixRotationY(XMConvertToRadians(45.0f) * CTimeManager::GetTimeDelta());
+		//}
+		//if (GetAsyncKeyState(VK_LEFT))
+		//{
+		//	change = true;
+		//	rotation = XMMatrixRotationY(XMConvertToRadians(-45.0f) * CTimeManager::GetTimeDelta());
+		//}
+		//if (GetAsyncKeyState(VK_UP))
+		//{
+		//	change = true;
+		//	translation = XMMatrixTranslation(0, 0, -5.0f * CTimeManager::GetTimeDelta());
+		//}
+		//if (GetAsyncKeyState(VK_DOWN))
+		//{
+		//	change = true;
+		//	translation = XMMatrixTranslation(0, 0, 5.0f * CTimeManager::GetTimeDelta());
+		//}
+		////Reset it's position.
+		//if (GetAsyncKeyState('P'))
+		//{
+		//	XMStoreFloat4x4(&GetOwner()->GetWorldMat(), XMMatrixIdentity());
+		//}
+
+		change = true;
+		rotation = XMMatrixRotationY(XMConvertToRadians(-45.0f) * CTimeManager::GetTimeDelta());
 
 		if (change)
 		{

@@ -18,6 +18,7 @@
 #include "CameraManager.h"
 #include "Shaders\VertexBuffers.h"
 #include "DepthStencilStateManager.h"
+#include "../Utilities/Util.h"
 
 //Namespaces used
 
@@ -64,6 +65,19 @@ bool CRenderController::Initialize(CRenderer* const _renderer, Core* _core)
 
 	m_pContext->OMSetRenderTargets(1, &m_pRTV, m_pDSV);
 	m_pContext->RSSetViewports(1, &m_Viewport);
+
+	SetD3DName(m_pDSV, "Depth Stencil View");
+	SetD3DName(m_pDepthBuffer, "Depth Buffer");
+	SetD3DName(m_pBackBuffer, "Back Buffer");
+	SetD3DName(m_pRTV, "Render Target View");
+	SetD3DName(m_pContext, "Device Context");
+	SetD3DName(m_pSwapChain, "Swap Chain");
+	SetD3DName(m_pDevice, "The Device");
+
+	
+	//m_pDevice->SetPrivateData(, , "The Device");
+
+	
 
 	return true;
 }
@@ -175,24 +189,58 @@ HRESULT CRenderController::CreateDepthBuffer()
 {
 	HRESULT hr = S_OK;
 
-	D3D11_TEXTURE2D_DESC zBufferDESC;
-	ZeroMemory(&zBufferDESC, sizeof(zBufferDESC));
-	zBufferDESC.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	zBufferDESC.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	zBufferDESC.Width = (UINT)m_Viewport.Width;
-	zBufferDESC.Height = (UINT)m_Viewport.Height;
-	zBufferDESC.MipLevels = 1;
-	zBufferDESC.ArraySize = 1;
-	zBufferDESC.SampleDesc.Count = 1;
-	zBufferDESC.SampleDesc.Quality = 0;
-	zBufferDESC.Usage = D3D11_USAGE_DEFAULT;
+	//D3D11_TEXTURE2D_DESC zBufferDESC;
+	//ZeroMemory(&zBufferDESC, sizeof(zBufferDESC));
+	//zBufferDESC.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	//zBufferDESC.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	//zBufferDESC.Width = (UINT)m_Viewport.Width;
+	//zBufferDESC.Height = (UINT)m_Viewport.Height;
+	//zBufferDESC.MipLevels = 1;
+	//zBufferDESC.ArraySize = 1;
+	//zBufferDESC.SampleDesc.Count = 1;
+	//zBufferDESC.SampleDesc.Quality = 0;
+	//zBufferDESC.Usage = D3D11_USAGE_DEFAULT;
 
-	hr = m_pDevice->CreateTexture2D(&zBufferDESC, NULL, &m_pDepthBuffer);
+	D3D11_TEXTURE2D_DESC tDesc;
+	ZeroMemory(&tDesc, sizeof(tDesc));
+	tDesc.Width = (UINT)m_Viewport.Width;
+	tDesc.Height = (UINT)m_Viewport.Height;
+	tDesc.MipLevels = 1;
+	tDesc.ArraySize = 1;
+	tDesc.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+	tDesc.SampleDesc.Count = 1;
+	tDesc.SampleDesc.Quality = 0;
+	DXGI_SWAP_CHAIN_DESC TempSwapDesc;
+	m_pSwapChain->GetDesc(&TempSwapDesc);
+	tDesc.SampleDesc = TempSwapDesc.SampleDesc;
+	tDesc.Usage = D3D11_USAGE_DEFAULT;
+	tDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	tDesc.CPUAccessFlags = 0;
+	tDesc.MiscFlags = 0;
+
+	hr = m_pDevice->CreateTexture2D(&tDesc, NULL, &m_pDepthBuffer);
 	if (hr != S_OK)
 		return hr;
+	///////////////////////////////////////////
+	//Snippet
+	//Author: Daniel Stover
+	///////////////////////////////////////////
+	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
+	ZeroMemory(&descDSV, sizeof(descDSV));
+	descDSV.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+#if USING_MSAA == 1
+	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
+#else 
+	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+#endif
+	descDSV.Texture2D.MipSlice = 0;
+
+	///////////////////////////////////////////////
+	//End Snippet
+	///////////////////////////////////////////////
 
 	//Create the Depth Stencil View
-	hr = m_pDevice->CreateDepthStencilView(m_pDepthBuffer, NULL, &m_pDSV);
+	hr = m_pDevice->CreateDepthStencilView(m_pDepthBuffer, &descDSV, &m_pDSV);
 
 	return hr;
 }
@@ -238,6 +286,17 @@ void CRenderController::PresentScene()
 
 void CRenderController::DrawObject(CGameObject * _obj, CRenderComponent * _comp)
 {
+	if (!_obj || !_comp)
+		return;
+
+	static UINT current_type = UINT_MAX;
+	if (current_type != _comp->GetRenderType())
+	{
+		current_type = _comp->GetRenderType();
+		SetDepthStencilState(current_type);
+	}
+
+
 	CRenderer& renderer = *_pRenderer;
 
 	//Bind Shaders

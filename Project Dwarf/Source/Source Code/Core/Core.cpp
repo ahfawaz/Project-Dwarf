@@ -143,6 +143,11 @@ CAssetManager* Core::GetAssetManager() const
 	return m_pAssetManager;
 }
 
+CRenderer* Core::GetRenderer() const
+{
+	return m_pRenderer;
+}
+
 HWND Core::GetWindow() const
 {
 	return m_Window;

@@ -7,6 +7,7 @@
 //Header includes
 #include "../Core/Core.h"
 #include "../Components/RenderComponent.h"
+#include "../Utilities/Util.h"
 
 //Shader Includes
 ///Vertex Shaders
@@ -94,6 +95,10 @@ HRESULT CShaderManager::LoadVertexShaders(ID3D11Device* _device)
 	if (hr != S_OK)
 		return hr;
 
+	SetD3DName(m_vsEmptyVertex, "Empty Vertex Shader");
+	SetD3DName(m_vsStaticNoTangents, "Static No Tangent Vertex Shader");
+	SetD3DName(m_vsStaticWithTangents, "Static Tangent Vertex Shader");
+
 	return hr;
 }
 
@@ -116,6 +121,9 @@ HRESULT CShaderManager::LoadPixelShaders(ID3D11Device* _device)
 	hr = _device->CreatePixelShader(TexturePixelShader, sizeof(TexturePixelShader), NULL, &m_psTexture);
 	if (hr != S_OK)
 		return hr;
+
+	SetD3DName(m_psBasic, "Basic Pixel Shader");
+	SetD3DName(m_psTexture, "Texture Pixel Shader");
 
 	return hr;
 }
@@ -163,6 +171,8 @@ HRESULT CShaderManager::LoadInputLayouts(ID3D11Device* _device)
 	if (hr != S_OK)
 		return hr;
 
+	SetD3DName(m_ilStaticNoTangents, "Input Layout No Tangents");
+	SetD3DName(m_ilStaticWithTangents, "Input Layout Tangents");
 
 	return hr;
 }

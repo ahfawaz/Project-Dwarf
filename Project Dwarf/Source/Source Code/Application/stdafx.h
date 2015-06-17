@@ -21,7 +21,8 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <d3d11_2.h>
+#include <d3d11.h>
+#pragma comment(lib, "d3d11")
 #include <DirectXMath.h>
 
 //Header Includes

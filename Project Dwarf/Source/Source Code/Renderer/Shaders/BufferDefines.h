@@ -16,7 +16,7 @@ typedef XMFLOAT3X3 float3x3;
 
 ///The following is not my code. This code is from Full Sail's Game Engine used for their classes.
 // lets us ensure constant buffers and their variables are 16byte aligned to HLSL 4-float registers
-#define _regAlign __declspec(align(16))
+#define _regAlign /*__declspec(align(16))*/
 // allows us to attach semantics to HLSL variables without bugging C++
 #define SEMANTIC(s_name) /* : s_name */
 

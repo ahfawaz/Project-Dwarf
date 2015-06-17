@@ -145,6 +145,9 @@
     <ClInclude Include="Source Code\Utilities\Util.h">
       <Filter>Utilities</Filter>
     </ClInclude>
+    <ClInclude Include="Source Code\Components\CameraComponent.h">
+      <Filter>Object Manager\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\Application\stdafx.cpp">
@@ -215,6 +218,9 @@
     </ClCompile>
     <ClCompile Include="Source Code\Utilities\Util.cpp">
       <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Components\CameraComponent.cpp">
+      <Filter>Object Manager\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

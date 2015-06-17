@@ -3,11 +3,12 @@
 #include "Mesh.h"
 
 //STL includes
-#include <d3d11_2.h>
+#include <d3d11.h>
 #pragma comment(lib, "d3d11")
 
 //Header includes
 #include "../Renderer/Shaders/VertexBuffers.h"
+#include "../Utilities/Util.h"
 
 
 
@@ -61,12 +62,13 @@ bool CMesh::LoadStaticMesh(ID3D11Device* _device, tMesh_Data& _data)
 	//	initData.SysMemSlicePitch = NULL;
 
 	//	hr = _device->CreateBuffer(&BufferDESC, &initData, &m_pVerts);
-
+	
 	//	if (hr != S_OK)
 	//	{
 	//		return false;
 	//	}
 
+	//  SetD3DName(m_pVerts, "Static Tangent Mesh");
 	//	m_bTangents = true;
 	//}
 	//else
@@ -86,6 +88,7 @@ bool CMesh::LoadStaticMesh(ID3D11Device* _device, tMesh_Data& _data)
 		BufferDESC.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		BufferDESC.Usage = D3D11_USAGE_DEFAULT;
 		BufferDESC.ByteWidth = sizeof(v_StaticNoTangs)* m_nNumVerts;
+		BufferDESC.StructureByteStride = sizeof(v_StaticNoTangs);
 
 		initData.pSysMem = &buffer[0];
 		initData.SysMemPitch = NULL;
@@ -98,6 +101,7 @@ bool CMesh::LoadStaticMesh(ID3D11Device* _device, tMesh_Data& _data)
 			return false;
 		}
 
+		SetD3DName(m_pVerts, "Static No Tangent Mesh");
 	}
 
 	m_nNumIndex = (UINT)_data.indicies.size();
@@ -116,6 +120,8 @@ bool CMesh::LoadStaticMesh(ID3D11Device* _device, tMesh_Data& _data)
 	{
 		return false;
 	}
+
+	SetD3DName(m_pIndex, "Static Index");
 
 
 	return true;
@@ -162,6 +168,8 @@ bool CMesh::LoadAnimMesh(ID3D11Device* _device, tMesh_Data& _data, tAnim_Data& _
 			return false;
 		}
 
+		SetD3DName(m_pVerts, "Animated Tangent Mesh");
+
 		m_bTangents = true;
 
 	}
@@ -197,6 +205,7 @@ bool CMesh::LoadAnimMesh(ID3D11Device* _device, tMesh_Data& _data, tAnim_Data& _
 		{
 			return false;
 		}
+		SetD3DName(m_pVerts, "Animated No Tangent Mesh");
 	}
 
 	m_nNumIndex = (UINT)_data.indicies.size();
@@ -217,6 +226,8 @@ bool CMesh::LoadAnimMesh(ID3D11Device* _device, tMesh_Data& _data, tAnim_Data& _
 	{
 		return false;
 	}
+
+	SetD3DName(m_pIndex, "Animated Index");
 
 	m_bAnimated = true;
 

@@ -18,8 +18,8 @@ class CComponent;
 //eDEFAULT == Unset Component
 //eMAIN_COMP == The main Components that know about the other components
 //All other types are the components that make up the gameobject.
-enum eCompTypes { eDEFAULT, eMAIN_COMP, eRENDER_COMP, eNUM_OF_COMP};
-enum eObjTypes { eDEF_OBJ, eTEST_OBJ };
+enum eCompTypes { eDEFAULT, eMAIN_COMP, eRENDER_COMP, eCAMERA_COMP, eNUM_OF_COMP};
+enum eObjTypes { eDEF_OBJ, eTEST_OBJ, ePLAYER_OBJ };
 
 #define MAIN_COMP 0
 

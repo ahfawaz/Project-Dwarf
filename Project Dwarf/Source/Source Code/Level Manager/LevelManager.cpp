@@ -2,6 +2,8 @@
 
 #include "LevelManager.h"
 #include "../Core/Core.h"
+//#include "../Renderer/RenderMain.h"
+#include "../Renderer/CameraManager.h"
 #include "../Object Manager/ObjectManager.h"
 #include "../Object Manager/GameObject.h"
 #include "../Asset Manager/AssetManager.h"
@@ -11,6 +13,7 @@
 #include "../Components/Component.h"
 #include "../Components/RenderComponent.h"
 #include "../Components/TestingComponent.h"
+#include "../Components/CameraComponent.h"
 
 CLevelManager::CLevelManager()
 {
@@ -48,25 +51,37 @@ void CLevelManager::LoadTestLevel(Core* _core)
 		_pAsset_Manager.InitializeFBX();
 
 	//Create a game object to be add to the object manager
-	CGameObject* player = new CGameObject;
+	CGameObject* Test_Model = new CGameObject;
 	
 	//Create the main component
 	TestComponent* test_comp = new TestComponent;
-	test_comp->SetOwner(player);
+	test_comp->SetOwner(Test_Model);
 	//Add test component to the game object
-	player->AddComponent(test_comp);
+	Test_Model->AddComponent(test_comp);
 
 	//Set the Render Data
 	CRenderComponent* render_comp = new CRenderComponent();
 	tModel data;
 	//Load the mesh for the component
-	_pAsset_Manager.LoadMesh("../Assets/Character Models/Player/Dwarf_Model.fbx", &data.pMesh);
+	_pAsset_Manager.LoadMesh("../Assets/Character Models/Player/Test_Model_1.fbx", &data.pMesh);
 	//Initialize the component and add it to the game object
 	render_comp->Initiailze(&data);
-	player->AddComponent(render_comp);
+	Test_Model->AddComponent(render_comp);
+	Test_Model->GetObjectType() = eObjTypes::eTEST_OBJ;
+
+	_pObj_Manager.AddObject(Test_Model);
 
 
-	_pObj_Manager.AddObject(player);
+	//Creating the Player for Camera controll
+	CGameObject* Player = new CGameObject;
+	CCameraComponent* cam_comp = new CCameraComponent;
+	cam_comp->SetOwner(Player);
+	bool happening = cam_comp->Initialize(_core->GetRenderer()->GetCameraManager());
+	Player->AddComponent(cam_comp);
+	Player->GetObjectType() = eObjTypes::ePLAYER_OBJ;
+	_pObj_Manager.AddObject(Player);
 
+
+	//Shutdown FBX we don't need it anymore.
 	_pAsset_Manager.ShutdownFBX();
 }

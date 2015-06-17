@@ -184,6 +184,7 @@
     <ClInclude Include="Source Code\Asset Manager\AssetManager.h" />
     <ClInclude Include="Source Code\Asset Manager\DDSTextureLoader.h" />
     <ClInclude Include="Source Code\Asset Manager\Mesh.h" />
+    <ClInclude Include="Source Code\Components\CameraComponent.h" />
     <ClInclude Include="Source Code\Components\Component.h" />
     <ClInclude Include="Source Code\Components\RenderComponent.h" />
     <ClInclude Include="Source Code\Components\TestingComponent.h" />
@@ -214,6 +215,7 @@
     <ClCompile Include="Source Code\Asset Manager\AssetManager.cpp" />
     <ClCompile Include="Source Code\Asset Manager\DDSTextureLoader.cpp" />
     <ClCompile Include="Source Code\Asset Manager\Mesh.cpp" />
+    <ClCompile Include="Source Code\Components\CameraComponent.cpp" />
     <ClCompile Include="Source Code\Components\RenderComponent.cpp" />
     <ClCompile Include="Source Code\Components\TestingComponent.cpp" />
     <ClCompile Include="Source Code\Core\Core.cpp" />

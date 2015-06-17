@@ -1,6 +1,16 @@
 #include "../Application/stdafx.h"
 
 #include "DepthStencilStateManager.h"
+#include "../Utilities/Util.h"
+
+#if _DEBUG
+string debug_name;
+#define SET_DEBUG_NAME(x) debug_name = x;
+#define GET_DEBUG_NAME debug_name.c_str()
+#else
+#define SET_DEBUG_NAME
+#define GET_DEBUG_NAME
+#endif
 
 
 CDepthStencilStateManager::CDepthStencilStateManager()
@@ -27,7 +37,6 @@ bool CDepthStencilStateManager::Initialize(ID3D11Device* _device)
 	{
 		eDepthStencilStates state = eDepthStencilStates(i);
 
-
 		switch (state)
 		{
 		case eDSS_DEFAULT:
@@ -46,6 +55,7 @@ bool CDepthStencilStateManager::Initialize(ID3D11Device* _device)
 			DSS_DESC.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
 			DSS_DESC.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
+			SET_DEBUG_NAME("DSS Default");
 			break;
 		case eDSS_SIZE:
 		default:
@@ -59,6 +69,8 @@ bool CDepthStencilStateManager::Initialize(ID3D11Device* _device)
 			SAFE_RELEASE(pDSS);
 			return false;
 		}
+
+		SetD3DName(pDSS, GET_DEBUG_NAME);
 		
 		m_pDSSList.push_back(pDSS);
 		pDSS = nullptr;

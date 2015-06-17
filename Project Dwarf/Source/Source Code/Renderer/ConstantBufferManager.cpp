@@ -11,6 +11,7 @@
 #include "ContextManager.h"
 #include "../Object Manager/GameObject.h"
 #include "../Components/RenderComponent.h"
+#include "../Utilities/Util.h"
 
 //Namespaces Used
 
@@ -58,6 +59,10 @@ bool CConstantBufferManager::Initialize(ID3D11Device* _device, ID3D11DeviceConte
 	hr = _device->CreateBuffer(&const_desc, NULL, &m_pBatchPos);
 	if (hr != S_OK)
 		return false;
+	
+	SetD3DName(m_pWorldView, "World View");
+	SetD3DName(m_pWorldPos, "World Pos");
+	SetD3DName(m_pBatchPos, "Batch Buffer");
 
 	return true;
 }
