@@ -162,10 +162,11 @@ bool CAssetManager::LoadMesh(string _filename, CMesh** _mesh_out, bool _animated
 
 	for (int triIndex = 0; triIndex < tri_Count; triIndex++)
 	{
-		int startIndex = pMesh->GetPolygonVertexIndex(triIndex);
-		for (int vertIndex = 0; vertIndex < 3; vertIndex++, startIndex++)
+		int startIndex = pMesh->GetPolygonVertexIndex(triIndex) + 2;
+		for (int vertIndex = 2; vertIndex > -1; vertIndex--, startIndex--)
 		{
 			highest_index = max(highest_index, (INT)indicies[startIndex]);
+			mesh_data.indicies.push_back(indicies[startIndex]);
 
 			//Read the vert for this index.
 			int ctrl_Point = pMesh->GetPolygonVertex(triIndex, vertIndex);
@@ -294,8 +295,8 @@ bool CAssetManager::LoadMesh(string _filename, CMesh** _mesh_out, bool _animated
 #endif
 
 	//Reverse the index array
-	reverse(indicies.begin(), indicies.end());
-	mesh_data.indicies = indicies;
+	//reverse(indicies.begin(), indicies.end());
+	//mesh_data.indicies = indicies;
 
 	//if the object is animated get that data too
 	tAnim_Data anim_data;

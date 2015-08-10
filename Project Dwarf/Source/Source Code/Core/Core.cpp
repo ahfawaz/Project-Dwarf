@@ -13,6 +13,7 @@
 #define TEST_LEVEL 1
 #define TEST_FP "N/A"
 
+
 Core::Core()
 {
 	m_pObjectManager = nullptr;
@@ -72,7 +73,14 @@ bool Core::Initialize(HWND _hWnd, HINSTANCE _hInstance, int _width, int _height,
 
 	//Initialize the Asset Manager
 	m_pAssetManager = new CAssetManager;
-	if (!m_pAssetManager->Initialize(m_pRenderer->GetRenderController()->GetDevice())) //must change to get the right device.
+	if (m_pRenderer)
+	{
+		if (!m_pAssetManager->Initialize(m_pRenderer->GetRenderController()->GetDevice())) //must change to get the right device.
+		{
+			SAFE_SHUTDOWN(m_pAssetManager);
+		}
+	}
+	else if (!m_pAssetManager->Initialize(NULL)) //must change to get the right device.
 	{
 		SAFE_SHUTDOWN(m_pAssetManager);
 	}
@@ -198,3 +206,5 @@ void Core::SetIsWindowed(bool _windowed)
 {
 	m_bWindowed = _windowed;
 }
+
+

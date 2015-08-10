@@ -10,8 +10,9 @@ v_StaticOut main(v_StaticNoTangs v_in)
 
 	float4 pos = float4(v_in.pos, 1.0f);
 		pos = mul(pos, world_matrix);
-	pos = mul(pos, view_matrix);
-	pos = mul(pos, proj_matrix);
+	float4x4 view_proj = mul(view_matrix, proj_matrix);
+	pos = mul(pos, view_proj);
+	//pos = mul(pos, proj_matrix);
 
 	float3 norm = v_in.norm;
 		float4 color_out = float4((norm.x + 1.0f) * 0.5f, (norm.y + 1.0f) * 0.5f, (norm.z + 1.0f) * 0.5f, 1.0f);

@@ -25,6 +25,7 @@ class CRenderController
 	ID3D11Texture2D*		m_pDepthBuffer;
 	ID3D11Resource*			m_pBackBuffer;
 	ID3D11DepthStencilView* m_pDSV;
+	ID3D11RasterizerState*	m_pRasterizerState;
 	D3D11_VIEWPORT			m_Viewport;
 
 	CRenderer*				_pRenderer;
@@ -55,6 +56,7 @@ private:
 	HRESULT CreateSwapChainandDevice(HWND _hWnd, bool _windowed);
 	HRESULT CreateRenderTarget();
 	HRESULT CreateDepthBuffer();
+	HRESULT CreateRasterizerState();
 
 	void SetDepthStencilState(UINT _render_type);
 	void DrawObject(CGameObject * _obj, CRenderComponent * _comp);

@@ -6,6 +6,7 @@
 
 //Header includes
 #include "../Core/Core.h"
+#include "../Utilities/TimeManager.h"
 
 //Namespaces used
 
@@ -57,9 +58,9 @@ void CCameraManager::Update()
 
 		XMVECTOR velocity = XMLoadFloat3(&m_fVelocity);
 		velocity = XMVector3Normalize(velocity);
-		velocity = velocity * CAM_MOVE_SPEED;
+		velocity = velocity * CAM_MOVE_SPEED * CTimeManager::GetTimeDelta();
 
-		view_mat = XMMatrixTranslationFromVector(velocity);
+		view_mat = XMMatrixTranslationFromVector(velocity) * view_mat;
 		view_mat = XMMatrixInverse(NULL, view_mat);
 		XMStoreFloat4x4(&m_fViewMatrix, view_mat);
 	}
@@ -97,7 +98,7 @@ void CCameraManager::RotateView(float _x, float _y)
 	XMVECTOR view_pos = view_mat.r[3];
 	view_mat.r[3] = XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);
 
-	view_mat = XMMatrixRotationX(_x * CAM_TURN_SPEED) * view_mat * XMMatrixRotationY(_y * CAM_TURN_SPEED);
+	view_mat = XMMatrixRotationX(_y * CAM_TURN_SPEED) * view_mat * XMMatrixRotationY(_x * CAM_TURN_SPEED);
 
 	view_mat.r[3] = view_pos;
 

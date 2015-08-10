@@ -49,7 +49,7 @@ bool CConstantBufferManager::Initialize(ID3D11Device* _device, ID3D11DeviceConte
 		return false;
 
 	//World Position Data
-	const_desc.ByteWidth = sizeof(cb_WorldView);
+	const_desc.ByteWidth = sizeof(cb_WorldPos);
 	hr = _device->CreateBuffer(&const_desc, NULL, &m_pWorldPos);
 	if (hr != S_OK)
 		return false;

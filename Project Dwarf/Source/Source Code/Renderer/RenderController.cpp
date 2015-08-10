@@ -61,11 +61,17 @@ bool CRenderController::Initialize(CRenderer* const _renderer, Core* _core)
 	if (hr != S_OK)
 		return false;
 
+	hr = CreateRasterizerState();
+	if (hr != S_OK)
+		return false;
+
 	_pCore = _core;
 
 	m_pContext->OMSetRenderTargets(1, &m_pRTV, m_pDSV);
 	m_pContext->RSSetViewports(1, &m_Viewport);
+	m_pContext->RSSetState(m_pRasterizerState);
 
+	SetD3DName(m_pRasterizerState, "Rasterizer State");
 	SetD3DName(m_pDSV, "Depth Stencil View");
 	SetD3DName(m_pDepthBuffer, "Depth Buffer");
 	SetD3DName(m_pBackBuffer, "Back Buffer");
@@ -74,16 +80,17 @@ bool CRenderController::Initialize(CRenderer* const _renderer, Core* _core)
 	SetD3DName(m_pSwapChain, "Swap Chain");
 	SetD3DName(m_pDevice, "The Device");
 
-	
+
 	//m_pDevice->SetPrivateData(, , "The Device");
 
-	
+
 
 	return true;
 }
 
 void CRenderController::Shutdown()
 {
+	SAFE_RELEASE(m_pRasterizerState);
 	SAFE_RELEASE(m_pDSV);
 	SAFE_RELEASE(m_pDepthBuffer);
 	SAFE_RELEASE(m_pBackBuffer);
@@ -189,58 +196,30 @@ HRESULT CRenderController::CreateDepthBuffer()
 {
 	HRESULT hr = S_OK;
 
-	//D3D11_TEXTURE2D_DESC zBufferDESC;
-	//ZeroMemory(&zBufferDESC, sizeof(zBufferDESC));
-	//zBufferDESC.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	//zBufferDESC.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	//zBufferDESC.Width = (UINT)m_Viewport.Width;
-	//zBufferDESC.Height = (UINT)m_Viewport.Height;
-	//zBufferDESC.MipLevels = 1;
-	//zBufferDESC.ArraySize = 1;
-	//zBufferDESC.SampleDesc.Count = 1;
-	//zBufferDESC.SampleDesc.Quality = 0;
-	//zBufferDESC.Usage = D3D11_USAGE_DEFAULT;
+	//Create the 2D Texture buffer DESC that will act as the ZBuffer (depth buffer)
+	D3D11_TEXTURE2D_DESC zBufferDESC = CD3D11_TEXTURE2D_DESC(DXGI_FORMAT_D32_FLOAT,(UINT)m_Viewport.Width,(UINT)m_Viewport.Height);
+	zBufferDESC.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 
-	D3D11_TEXTURE2D_DESC tDesc;
-	ZeroMemory(&tDesc, sizeof(tDesc));
-	tDesc.Width = (UINT)m_Viewport.Width;
-	tDesc.Height = (UINT)m_Viewport.Height;
-	tDesc.MipLevels = 1;
-	tDesc.ArraySize = 1;
-	tDesc.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
-	tDesc.SampleDesc.Count = 1;
-	tDesc.SampleDesc.Quality = 0;
-	DXGI_SWAP_CHAIN_DESC TempSwapDesc;
-	m_pSwapChain->GetDesc(&TempSwapDesc);
-	tDesc.SampleDesc = TempSwapDesc.SampleDesc;
-	tDesc.Usage = D3D11_USAGE_DEFAULT;
-	tDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	tDesc.CPUAccessFlags = 0;
-	tDesc.MiscFlags = 0;
-
-	hr = m_pDevice->CreateTexture2D(&tDesc, NULL, &m_pDepthBuffer);
+	//Create the ZBuffer (Depth Buffer)
+	hr = m_pDevice->CreateTexture2D(&zBufferDESC, NULL, &m_pDepthBuffer);
 	if (hr != S_OK)
 		return hr;
-	///////////////////////////////////////////
-	//Snippet
-	//Author: Daniel Stover
-	///////////////////////////////////////////
-	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
-	ZeroMemory(&descDSV, sizeof(descDSV));
-	descDSV.Format = DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
-#if USING_MSAA == 1
-	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
-#else 
-	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-#endif
-	descDSV.Texture2D.MipSlice = 0;
 
-	///////////////////////////////////////////////
-	//End Snippet
-	///////////////////////////////////////////////
+	//Create the Depth Stencil View DESC
+	CD3D11_DEPTH_STENCIL_VIEW_DESC dsv_DESC(m_pDepthBuffer, D3D11_DSV_DIMENSION_TEXTURE2D);
 
 	//Create the Depth Stencil View
-	hr = m_pDevice->CreateDepthStencilView(m_pDepthBuffer, &descDSV, &m_pDSV);
+	hr = m_pDevice->CreateDepthStencilView(m_pDepthBuffer, NULL, &m_pDSV);
+
+	return hr;
+}
+
+HRESULT CRenderController::CreateRasterizerState()
+{
+	HRESULT hr = S_OK;
+
+	D3D11_RASTERIZER_DESC rasterizerDESC = CD3D11_RASTERIZER_DESC(CD3D11_DEFAULT());
+	hr = m_pDevice->CreateRasterizerState(&rasterizerDESC, &m_pRasterizerState);
 
 	return hr;
 }
@@ -274,7 +253,7 @@ void CRenderController::DrawScene()
 		render_obj = render_list[i];
 		render_comp = static_cast<CRenderComponent*>(render_obj->GetComponentByType(eCompTypes::eRENDER_COMP));
 
-		DrawObject(render_obj, render_comp);		
+		DrawObject(render_obj, render_comp);
 
 	}
 }

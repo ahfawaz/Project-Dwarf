@@ -50,6 +50,7 @@ void CLevelManager::LoadTestLevel(Core* _core)
 
 		_pAsset_Manager.InitializeFBX();
 
+	///Test Object 1
 	//Create a game object to be add to the object manager
 	CGameObject* Test_Model = new CGameObject;
 	
@@ -63,7 +64,7 @@ void CLevelManager::LoadTestLevel(Core* _core)
 	CRenderComponent* render_comp = new CRenderComponent();
 	tModel data;
 	//Load the mesh for the component
-	_pAsset_Manager.LoadMesh("../Assets/Character Models/Player/Test_Model_1.fbx", &data.pMesh);
+	_pAsset_Manager.LoadMesh("../Assets/Character Models/Player/Test_Model_2.fbx", &data.pMesh);
 	//Initialize the component and add it to the game object
 	render_comp->Initiailze(&data);
 	Test_Model->AddComponent(render_comp);
@@ -71,6 +72,50 @@ void CLevelManager::LoadTestLevel(Core* _core)
 
 	_pObj_Manager.AddObject(Test_Model);
 
+	///Test Object 2
+	//Create a game object to be add to the object manager
+	Test_Model = new CGameObject;
+
+	//Create the main component
+	test_comp = new TestComponent;
+	test_comp->SetOwner(Test_Model);
+	//Add test component to the game object
+	Test_Model->AddComponent(test_comp);
+
+	//Set the Render Data
+	render_comp = new CRenderComponent();
+	//Load the mesh for the component
+	_pAsset_Manager.LoadMesh("../Assets/Character Models/Player/Test_Model_1.fbx", &data.pMesh);
+	//Initialize the component and add it to the game object
+	render_comp->Initiailze(&data);
+	XMStoreFloat4x4(&Test_Model->GetWorldMat(), XMMatrixTranslation(5.0f, 0, 0));
+	Test_Model->AddComponent(render_comp);
+	Test_Model->GetObjectType() = eObjTypes::eTEST_OBJ;
+
+	_pObj_Manager.AddObject(Test_Model);
+
+
+	///Test Object 2
+	//Create a game object to be add to the object manager
+	Test_Model = new CGameObject;
+
+	//Create the main component
+	test_comp = new TestComponent;
+	test_comp->SetOwner(Test_Model);
+	//Add test component to the game object
+	Test_Model->AddComponent(test_comp);
+
+	//Set the Render Data
+	render_comp = new CRenderComponent();
+	//Load the mesh for the component
+	_pAsset_Manager.LoadMesh("../Assets/Character Models/Player/Dwarf_Model.fbx", &data.pMesh);
+	//Initialize the component and add it to the game object
+	render_comp->Initiailze(&data);
+	XMStoreFloat4x4(&Test_Model->GetWorldMat(), XMMatrixTranslation(-5.0f, 0, 0));
+	Test_Model->AddComponent(render_comp);
+	Test_Model->GetObjectType() = eObjTypes::eTEST_OBJ;
+
+	_pObj_Manager.AddObject(Test_Model);
 
 	//Creating the Player for Camera controll
 	CGameObject* Player = new CGameObject;

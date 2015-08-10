@@ -33,6 +33,9 @@ class CShaderManager
 	ID3D11InputLayout* m_ilStaticNoTangents;
 	ID3D11InputLayout* m_ilStaticWithTangents;
 
+	UINT m_ShaderFlag;
+	UINT m_LayoutFlag;
+
 public:
 	CShaderManager();
 	~CShaderManager();

@@ -25,31 +25,31 @@ void CCameraComponent::UpdateComponent()
 {
 	XMFLOAT3 direction = { 0.0f, 0.0f, 0.0f };
 
-	if (GetAsyncKeyState('W') & 1)
+	if (GetAsyncKeyState('W'))
 	{
-		direction.z = 1.0f * CTimeManager::GetTimeDelta();
+		direction.z = 1.0f;
 	}
-	if (GetAsyncKeyState('S') & 1)
+	if (GetAsyncKeyState('S'))
 	{
-		direction.z = -1.0f * CTimeManager::GetTimeDelta();
+		direction.z = -1.0f;
 	}
-	if (GetAsyncKeyState('A') & 1)
+	if (GetAsyncKeyState('A'))
 	{
-		direction.x = -1.0f * CTimeManager::GetTimeDelta();
+		direction.x = -1.0f;
 	}
-	if (GetAsyncKeyState('D') & 1)
+	if (GetAsyncKeyState('D'))
 	{
-		direction.x = 1.0f * CTimeManager::GetTimeDelta();
+		direction.x = 1.0f;
 	}
-	if (GetAsyncKeyState('Q') & 1)
+	if (GetAsyncKeyState('Q'))
 	{
-		direction.y = -1.0f * CTimeManager::GetTimeDelta();
+		direction.y = -1.0f;
 	}
-	if (GetAsyncKeyState('E') & 1)
+	if (GetAsyncKeyState('E'))
 	{
-		direction.y = 1.0f * CTimeManager::GetTimeDelta();
+		direction.y = 1.0f;
 	}
-	if (GetAsyncKeyState('P') & 1)
+	if (GetAsyncKeyState('P'))
 	{
 		_pCameraManager->ResetCamera();
 	}

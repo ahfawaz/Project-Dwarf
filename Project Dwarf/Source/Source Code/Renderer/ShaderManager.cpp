@@ -25,7 +25,7 @@
 
 //Definitions & Globals
 
-CShaderManager::CShaderManager()
+CShaderManager::CShaderManager() : m_ShaderFlag(0), m_LayoutFlag(0)
 {
 }
 
@@ -39,22 +39,22 @@ bool CShaderManager::Initialize(ID3D11Device* _device)
 
 	//Vertex Shader Initializations
 	hr = LoadVertexShaders(_device);
-	if (hr != S_OK)
+	if (FAILED(hr))
 		return false;
 
 	//Geometry Shader Initializations
 	hr = LoadGeometryShaders(_device);
-	if (hr != S_OK)
+	if (FAILED(hr))
 		return false;
 
 	//Pixel Shader Initializations
 	hr = LoadPixelShaders(_device);
-	if (hr != S_OK)
+	if (FAILED(hr))
 		return false;
 
 	//Input Layout Initializations
 	hr = LoadInputLayouts(_device);
-	if (hr != S_OK)
+	if (FAILED(hr))
 		return false;
 
 	return true;
@@ -180,6 +180,10 @@ HRESULT CShaderManager::LoadInputLayouts(ID3D11Device* _device)
 void CShaderManager::BindShaders(ID3D11DeviceContext* _context, CRenderComponent* _comp)
 {
 	UINT flag = _comp->GetRenderType();
+	if (flag == m_ShaderFlag)
+		return;
+	else
+		m_ShaderFlag = flag;
 
 	switch (flag)
 	{
@@ -207,6 +211,10 @@ void CShaderManager::BindShaders(ID3D11DeviceContext* _context, CRenderComponent
 void CShaderManager::SetInputLayout(ID3D11DeviceContext* _context, CRenderComponent* _comp)
 {
 	UINT flag = _comp->GetRenderType();
+	if (flag == m_LayoutFlag)
+		return;
+	else
+		m_LayoutFlag = flag;
 
 	switch (flag)
 	{

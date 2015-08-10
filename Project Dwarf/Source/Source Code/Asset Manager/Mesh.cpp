@@ -88,7 +88,7 @@ bool CMesh::LoadStaticMesh(ID3D11Device* _device, tMesh_Data& _data)
 		BufferDESC.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 		BufferDESC.Usage = D3D11_USAGE_DEFAULT;
 		BufferDESC.ByteWidth = sizeof(v_StaticNoTangs)* m_nNumVerts;
-		BufferDESC.StructureByteStride = sizeof(v_StaticNoTangs);
+		//BufferDESC.StructureByteStride = sizeof(v_StaticNoTangs);
 
 		initData.pSysMem = &buffer[0];
 		initData.SysMemPitch = NULL;
