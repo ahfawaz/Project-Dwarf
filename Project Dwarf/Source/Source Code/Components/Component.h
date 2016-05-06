@@ -1,15 +1,17 @@
 #pragma once
 
 #include "../Object Manager/GameObject.h"
+#include <string>
 
 class CComponent
 {
 	eCompTypes m_eType;
 	UINT m_nCompIndex;
+	string m_sCompName;
 	CGameObject * m_pOwner;
 
 public:
-	CComponent() : m_eType(eCompTypes::eDEFAULT), m_nCompIndex(-1) {}
+	CComponent() : m_eType(eCompTypes::eDEFAULT), m_nCompIndex(-1), m_sCompName("Default") {}
 	CComponent(eCompTypes _type, int _index = -1) : m_eType(_type), m_nCompIndex(_index) {}
 	virtual ~CComponent() {}
 
@@ -22,6 +24,9 @@ public:
 
 	//If Index == -1 then component is not set properly
 	int	GetCompIndex() const { return m_nCompIndex; }
+
+	string GetCompName() const { return m_sCompName; }
+	void SetCompName(string _name) { m_sCompName = _name; }
 
 	//Get the Owner. If nullptr then owner was not set.
 	CGameObject* GetOwner() const

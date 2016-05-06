@@ -29,8 +29,15 @@ struct tModel{
 	tModel() : pMesh(nullptr), pDiffuse(nullptr), pSpecular(nullptr), pNormals(nullptr) {}
 };
 
-enum eRenderTypes{ eNONE, eDEF_RENDER = 0x1, eBATCH_RENDER = 0x2, eANIM_RENDER = 0x4, eTANGENT_RENDER = 0x8, 
-					eBATCH_W_TANGENTS = 0xA, eANIM_W_TANGENTS = 0xC, };
+enum eRenderTypes{ 
+	eNONE				= 0x0, 
+	eDEF_RENDER			= 0x1, 
+	eBATCH_RENDER		= 0x2, 
+	eANIM_RENDER		= 0x4, 
+	eTANGENT_RENDER		= 0x8, 
+	eBATCH_W_TANGENTS	= 0xA, 
+	eANIM_W_TANGENTS	= 0xC, 
+};
 
 class CRenderComponent : public CComponent
 {

@@ -6,6 +6,8 @@
 #include <vld.h>
 #endif
 
+#include <ctime>
+
 #include "../Application/stdafx.h"
 #include "WinMain.h"
 #include "../Core/Core.h"
@@ -32,7 +34,14 @@ ATOM				MyRegisterClass(HINSTANCE hInstance);
 BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
+
+
+#ifdef FPS
 void				FPSCounter(HINSTANCE hInstance);
+#define FPS_FUNC(x) FPSCounter(x)
+#else
+#define FPS_FUNC(x) 
+#endif
 
 
 int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
@@ -44,6 +53,9 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// TODO: Place code here.
+
+	//Seed Rand
+	srand(UINT(time(nullptr)));
 	MSG msg;
 	msg.hwnd = hWnd;
 	HACCEL hAccelTable;
@@ -86,9 +98,7 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
 		if (pCoreApp)
 		{
 			pCoreApp->Update();
-#ifdef FPS
-			FPSCounter(hInst);
-#endif
+			FPS_FUNC(hInst);
 		}
 	}
 
@@ -241,6 +251,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 	return (INT_PTR)FALSE;
 }
 
+#ifdef FPS
 //FPS Counter
 void FPSCounter(HINSTANCE hInstance)
 {
@@ -266,3 +277,5 @@ void FPSCounter(HINSTANCE hInstance)
 
 	frames++;
 }
+#endif // !FPS
+

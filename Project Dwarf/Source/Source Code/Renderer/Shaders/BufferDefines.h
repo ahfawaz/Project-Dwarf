@@ -11,6 +11,8 @@ typedef XMUINT4  uint4;
 typedef XMUINT3  uint3;
 typedef XMUINT2  uint2;
 
+typedef UINT	 uint;
+
 typedef XMFLOAT4X4 float4x4;
 typedef XMFLOAT3X3 float3x3;
 

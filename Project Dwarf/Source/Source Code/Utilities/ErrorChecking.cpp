@@ -16,19 +16,19 @@ bool CheckFloats(XMVECTOR _data)
 
 	return true;
 }
-bool CheckFloats(XMMATRIX _data)
-{
-	for (size_t i = 0; i < 4u; i++)
-	{
-		for (size_t j = 0; j < 4u; j++)
-		{
-			if (_data.r[i].m128_f32[j] != _data.r[i].m128_f32[j])
-				return false;
-		}
-	}
-
-	return true;
-}
+//bool CheckFloats( XMMATRIX _data)
+//{
+//	for (size_t i = 0; i < 4u; i++)
+//	{
+//		for (size_t j = 0; j < 4u; j++)
+//		{
+//			if (_data.r[i].m128_f32[j] != _data.r[i].m128_f32[j])
+//				return false;
+//		}
+//	}
+//
+//	return true;
+//}
 bool CheckFloats(XMFLOAT4X4 _data)
 {
 	for (size_t i = 0; i < 4u; i++)

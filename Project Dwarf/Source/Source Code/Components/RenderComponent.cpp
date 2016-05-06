@@ -38,7 +38,7 @@ bool CRenderComponent::Initiailze(tModel * _data, tBatchDraw * _batch)
 	m_pNormals = _data->pNormals;
 	m_pSpecular = _data->pSpecular;
 
-	if (!m_pMesh->IsAnimated() && !m_pMesh->IsTangents())
+	if (!m_pMesh->IsAnimated() && !m_pMesh->IsTangents() && !_batch)
 		m_nFlagTypes = eDEF_RENDER;
 	else
 	{

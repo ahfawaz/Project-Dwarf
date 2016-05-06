@@ -6,9 +6,14 @@
 #include <vector>
 #include <DirectXMath.h>
 #include <algorithm>
+#include <DDSTextureLoader.h>
+#include <WICTextureLoader.h>
+#pragma comment(lib, "DirectXTK") 
+
 
 //Class includes
 #include "Mesh.h"
+
 
 //Namespaces
 using namespace DirectX;
@@ -355,14 +360,15 @@ bool CAssetManager::LoadAnim(string _filename)
 bool CAssetManager::LoadTexture(string _filename, ID3D11ShaderResourceView** _texture)
 {
 	bool loaded = false;
+
+	string ext = _filename.substr(_filename.find_last_of(".") + 1);
 	//load DDS
-	loaded = LoadDDSTexture(_filename, _texture);
-	//load png
-	loaded = LoadPNGTexture(_filename, _texture);
-	//load tga
-	loaded = LoadTgaTexture(_filename, _texture);
-	//loag jpeg
-	loaded = LoadJpegTexture(_filename, _texture);
+	if (ext == "dds")
+		loaded = LoadDDSTexture(_filename, _texture);
+	//load other types of texture files
+	else
+		loaded = LoadOtherTexture(_filename, _texture);
+
 
 	return loaded;
 }
@@ -501,17 +507,16 @@ void CAssetManager::LoadSkin(FbxCluster * pCluster, int joint_index, tAnim_Data*
 
 bool CAssetManager::LoadDDSTexture(string _filename, ID3D11ShaderResourceView** _texture)
 {
+	wstring w_filename(_filename.begin(), _filename.end());
+	if (FAILED(CreateDDSTextureFromFile(_pDevice, w_filename.c_str(), NULL, _texture)))
+		return false;
 	return true;
 }
-bool CAssetManager::LoadPNGTexture(string _filename, ID3D11ShaderResourceView** _texture)
+bool CAssetManager::LoadOtherTexture(string _filename, ID3D11ShaderResourceView** _texture)
 {
+	wstring w_filename(_filename.begin(), _filename.end());
+	if (FAILED(CreateWICTextureFromFile(_pDevice, w_filename.c_str(), NULL, _texture)))
+		return false;
 	return true;
 }
-bool CAssetManager::LoadJpegTexture(string _filename, ID3D11ShaderResourceView** _texture)
-{
-	return true;
-}
-bool CAssetManager::LoadTgaTexture(string _filename, ID3D11ShaderResourceView** _texture)
-{
-	return true;
-}
+

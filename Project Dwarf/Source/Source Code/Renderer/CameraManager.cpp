@@ -16,6 +16,8 @@
 #define CAM_DIR XMFLOAT3(0.0f, 0.0f, 1.0f)
 #define CAM_UP	XMFLOAT3(0.0f, 1.0f, 0.0f)
 #define CAM_FOV XMConvertToRadians(90.0f)
+#define CAM_NEAR 0.01F
+#define CAM_FAR 1000.0F
 //#define ASPECT_RATIO(x, y) FLOAT(x) / FLOAT(y)
 #define ASPECT_RATIO(x,y) (16.0f / 9.0f)
 
@@ -36,7 +38,7 @@ CCameraManager::~CCameraManager()
 bool CCameraManager::Initialize(Core* _core)
 {
 	XMMATRIX view_mat = XMMatrixLookAtLH(XMLoadFloat3(&CAM_POS), XMLoadFloat3(&CAM_FOCUS_POS), XMLoadFloat3(&CAM_UP));
-	XMMATRIX proj_mat = XMMatrixPerspectiveFovLH(CAM_FOV, ASPECT_RATIO(_core->GetWindowWidth(), _core->GetWindowHeight()), NULL, MAX_DEPTH);
+	XMMATRIX proj_mat = XMMatrixPerspectiveFovLH(CAM_FOV, ASPECT_RATIO(_core->GetWindowWidth(), _core->GetWindowHeight()), CAM_NEAR, CAM_FAR);
 
 	XMStoreFloat4x4(&m_fViewMatrix, view_mat);
 	XMStoreFloat4x4(&m_fProjMatrix, proj_mat);

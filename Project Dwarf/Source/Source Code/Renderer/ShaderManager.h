@@ -22,6 +22,7 @@ class CShaderManager
 	ID3D11VertexShader* m_vsEmptyVertex;
 	ID3D11VertexShader* m_vsStaticNoTangents;
 	ID3D11VertexShader* m_vsStaticWithTangents;
+	ID3D11VertexShader* m_vsBatchNoTangents;
 
 	//Geometry Shaders
 

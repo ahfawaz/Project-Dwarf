@@ -22,6 +22,7 @@
 #include <vector>
 #include <map>
 #include <d3d11.h>
+#pragma comment(lib, "DirectXTK") 
 #pragma comment(lib, "d3d11")
 #include <DirectXMath.h>
 
@@ -41,3 +42,7 @@ using namespace DirectX;
 #define SAFE_SHUTDOWN(x) if(x) {x->Shutdown(); delete x;} x = nullptr;
 
 #define MAX_DEPTH 1.0F
+
+//true and false variables for special components (ie: flags, switches, and int variables used for shaders)
+#define ACTIVE 1U
+#define INACTIVE 0U

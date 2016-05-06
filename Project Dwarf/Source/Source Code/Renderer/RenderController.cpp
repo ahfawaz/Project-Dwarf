@@ -300,8 +300,23 @@ void CRenderController::DrawObject(CGameObject * _obj, CRenderComponent * _comp)
 	m_pContext->IASetIndexBuffer(_comp->GetMesh()->GetIndexBuffer(), DXGI_FORMAT_R32_UINT, NULL);
 
 	//draw the obj based on whether it's a batch draw or not.
-	///Assume it is not batch draw right now
-	m_pContext->DrawIndexed(_comp->GetMesh()->GetNumIndicies(), NULL, NULL);
+	switch (current_type)
+	{
+	case eNONE:
+		break;
+	case eDEF_RENDER:
+	case eTANGENT_RENDER:
+	case eANIM_RENDER:
+	case eANIM_W_TANGENTS:
+		m_pContext->DrawIndexed(_comp->GetMesh()->GetNumIndicies(), NULL, NULL);
+		break;
+	case eBATCH_RENDER:
+	case eBATCH_W_TANGENTS:
+		m_pContext->DrawIndexedInstanced(_comp->GetMesh()->GetNumIndicies(), (UINT)_comp->GetBatchPositions().size(), NULL, NULL, NULL);
+		break;
+	default:
+		break;
+	}
 
 }
 

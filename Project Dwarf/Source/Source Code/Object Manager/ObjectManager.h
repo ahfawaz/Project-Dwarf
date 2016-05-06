@@ -23,6 +23,8 @@ public:
 	//Function Calls
 	void Update();
 	bool AddObject(CGameObject* _obj);
+	//Function Call to Sort the Render List
+	void RenderSort();
 
 	//Accessors
 	vector<CGameObject*>& GetRenderList();
@@ -41,5 +43,8 @@ private:
 
 	///Rendered Objects
 	vector<CGameObject *> m_vRenderList;
+
+	//Private Functions
+
 };
 

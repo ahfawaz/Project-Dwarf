@@ -18,8 +18,9 @@ class CComponent;
 //eDEFAULT == Unset Component
 //eMAIN_COMP == The main Components that know about the other components
 //All other types are the components that make up the gameobject.
-enum eCompTypes { eDEFAULT, eMAIN_COMP, eRENDER_COMP, eCAMERA_COMP, eNUM_OF_COMP};
-enum eObjTypes { eDEF_OBJ, eTEST_OBJ, ePLAYER_OBJ };
+enum eCompTypes { eDEFAULT, eMAIN_COMP, eRENDER_COMP, eCAMERA_COMP, ePOINT_LIGHT,
+				eCONE_LIGHT, eDIR_LIGHT, eAMB_LIGHT, eNUM_OF_COMP};
+enum eObjTypes { eDEF_OBJ, eTEST_OBJ, eLIGHT_OBJ, ePLAYER_OBJ };
 
 #define MAIN_COMP 0
 
@@ -46,6 +47,8 @@ public:
 
 	//Run through the list of components and return the Component in question;
 	CComponent* GetComponentByType(eCompTypes _type);
+	//Run through the list of components and return all lights by that type.
+	vector<CComponent*> GetLightComponentsByType(UINT _eLight_Type);
 
 	XMFLOAT4X4& GetLocalMat();
 	XMFLOAT4X4& GetWorldMat();

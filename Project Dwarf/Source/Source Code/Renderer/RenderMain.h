@@ -20,6 +20,7 @@ class CConstantBufferManager;
 class CDepthStencilStateManager;
 class CBlendStateManager;
 class CCameraManager;
+class CLightMemoryManager;
 
 class CRenderer
 {
@@ -32,6 +33,7 @@ class CRenderer
 	CDepthStencilStateManager*	m_pDPSManager;
 	CBlendStateManager*			m_pBlendStateManager;
 	CCameraManager*				m_pCameraManager;
+	CLightMemoryManager*		m_pLightMM;
 
 
 
@@ -49,7 +51,7 @@ public:
 	CDepthStencilStateManager* GetDPSManager() const;
 	CConstantBufferManager* GetConstantBuffers() const;
 	CCameraManager* GetCameraManager() const;
-
+	CLightMemoryManager* GetLightMemoryManager() const;
 	//Mutators
 
 private:

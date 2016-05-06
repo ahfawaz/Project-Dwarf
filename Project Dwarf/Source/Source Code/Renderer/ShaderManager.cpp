@@ -14,6 +14,7 @@
 #include "Shaders\Vertex Shaders\EmptyVertex.csh"
 #include "Shaders\Vertex Shaders\StaticVertsUsingNoTangents.csh"
 #include "Shaders\Vertex Shaders\StaticVertUsingTangents.csh"
+#include "Shaders\Vertex Shaders\StaticBatchVertsNoTangents.csh"
 
 ///Geometry Shaders
 
@@ -66,6 +67,7 @@ void CShaderManager::Shutdown()
 	SAFE_RELEASE(m_vsEmptyVertex);
 	SAFE_RELEASE(m_vsStaticNoTangents);
 	SAFE_RELEASE(m_vsStaticWithTangents);
+	SAFE_RELEASE(m_vsBatchNoTangents)
 
 	//Shutdown of Geometry Shaders
 
@@ -95,9 +97,14 @@ HRESULT CShaderManager::LoadVertexShaders(ID3D11Device* _device)
 	if (hr != S_OK)
 		return hr;
 
+	hr = _device->CreateVertexShader(StaticBatchVertsNoTangents, sizeof(StaticBatchVertsNoTangents), NULL, &m_vsBatchNoTangents);
+	if (hr != S_OK)
+		return hr;
+
 	SetD3DName(m_vsEmptyVertex, "Empty Vertex Shader");
 	SetD3DName(m_vsStaticNoTangents, "Static No Tangent Vertex Shader");
 	SetD3DName(m_vsStaticWithTangents, "Static Tangent Vertex Shader");
+	SetD3DName(m_vsBatchNoTangents, "Static Batch Verts No Tangents");
 
 	return hr;
 }
@@ -194,6 +201,8 @@ void CShaderManager::BindShaders(ID3D11DeviceContext* _context, CRenderComponent
 		_context->PSSetShader(m_psBasic, NULL, NULL);
 		break;
 	case eBATCH_RENDER:
+		_context->VSSetShader(m_vsBatchNoTangents, NULL, NULL);
+		_context->PSSetShader(m_psBasic, NULL, NULL);
 		break;
 	case eANIM_RENDER:
 		break;

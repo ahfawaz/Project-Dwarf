@@ -5,6 +5,7 @@
 //Header Includes
 #include "GameObject.h"
 #include "../Components/Component.h"
+#include "../Components/LightComponent.h"
 
 //Name Spaces
 
@@ -51,6 +52,22 @@ CComponent* CGameObject::GetComponentByType(eCompTypes _type)
 	}
 
 	return nullptr;
+}
+
+vector<CComponent*> CGameObject::GetLightComponentsByType(UINT _eLight_Type)
+{
+	vector<CComponent*> Light_List_Return;
+
+	for (size_t i = 0; i < m_vCompList.size(); i++)
+	{
+		if (m_vCompList[i]->GetCompType() == _eLight_Type)
+		{
+			if (m_vCompList[i]->GetCompType() == _eLight_Type)
+				Light_List_Return.push_back(m_vCompList[i]);
+		}
+	}
+
+	return Light_List_Return;
 }
 
 

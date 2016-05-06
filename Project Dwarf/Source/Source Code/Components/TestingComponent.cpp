@@ -81,6 +81,8 @@ void TestComponent::UpdateComponent()
 			XMStoreFloat4x4(&GetOwner()->GetWorldMat(), world_mat);
 		}
 
+
+
 	}
 }
 

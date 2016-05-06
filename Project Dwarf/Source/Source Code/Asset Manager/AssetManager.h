@@ -60,11 +60,22 @@ private:
 	bool GetFbxMesh(FbxScene* _scene, FbxMesh** _mesh);
 	void LoadSkin(FbxCluster * pCluster, int joint_index, tAnim_Data* _data);
 
-	//Texture loaders
+	///Texture loaders
+	//Loads in DDS texture files.
+	//Input: 
+	//string _filename = the relative file path to the location of the texture.
+	//ID3D11ShaderResourceView **_texture = the destination to load the texture into.
+	//Output: 
+	//bool = if loading succeeded. 
 	bool LoadDDSTexture(string _filename, ID3D11ShaderResourceView** _texture);
-	bool LoadPNGTexture(string _filename, ID3D11ShaderResourceView** _texture);
-	bool LoadJpegTexture(string _filename, ID3D11ShaderResourceView** _texture);
-	bool LoadTgaTexture(string _filename, ID3D11ShaderResourceView** _texture);
+	//Loads in other types of texture files. (ex: bmp, tga, png, etc.)
+	//Input: 
+	//string _filename = the relative file path to the location of the texture.
+	//ID3D11ShaderResourceView **_texture = the destination to load the texture into.
+	//Output: 
+	//bool = if loading succeeded. 
+	bool LoadOtherTexture(string _filename, ID3D11ShaderResourceView** _texture);
+
 
 
 };

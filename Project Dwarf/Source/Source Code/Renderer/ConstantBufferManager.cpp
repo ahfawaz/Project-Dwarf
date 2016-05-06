@@ -88,7 +88,7 @@ void CConstantBufferManager::UpdateConstBuffers(CGameObject* _obj, CRenderCompon
 		BufferUpdate(&m_pWorldPos, _obj->GetWorldMat());
 		break;
 	case eBATCH_RENDER:
-		BufferUpdate(&m_pBatchPos, _comp->GetBatchPositions()[0], sizeof(XMFLOAT4X4) * (UINT)_comp->GetBatchPositions().size());
+		BufferUpdate(&m_pBatchPos, _comp->GetBatchPositions(), sizeof(XMFLOAT4X4) * (UINT)_comp->GetBatchPositions().size());
 		break;
 	case eANIM_RENDER:
 		break;
@@ -154,6 +154,6 @@ void CConstantBufferManager::BufferUpdate(ID3D11Buffer ** _buffer, TYPE & _data,
 {
 	D3D11_MAPPED_SUBRESOURCE map_resource;
 	_pContext->Map(*_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &map_resource);
-	memcpy_s(map_resource.pData, _data_size, &_data, sizeof(TYPE));
+	memcpy_s(map_resource.pData, _data_size, &_data[0], _data_size/* / sizeof(_data[0])*/);
 	_pContext->Unmap(*_buffer, 0);
 }

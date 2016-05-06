@@ -10,6 +10,7 @@
 #include "DepthStencilStateManager.h"
 #include "ConstantBufferManager.h"
 #include "CameraManager.h"
+#include "LightMemoryManager.h"
 #include "../Core/Core.h"
 
 //Namespaces used
@@ -46,6 +47,10 @@ bool CRenderer::Initialize(Core* _core)
 
 	m_pCameraManager = new CCameraManager;
 	if (!m_pCameraManager->Initialize(_core))
+		return false;
+
+	m_pLightMM = new CLightMemoryManager; //Just create the object and have it ready to load data into it.... should probably create a function that says load data since 
+	if (!m_pLightMM->Initialize())
 		return false;
 
 	return true;
@@ -93,6 +98,11 @@ CConstantBufferManager* CRenderer::GetConstantBuffers() const
 CCameraManager* CRenderer::GetCameraManager() const
 {
 	return m_pCameraManager;
+}
+
+CLightMemoryManager* CRenderer::GetLightMemoryManager() const
+{
+	return m_pLightMM;
 }
 
 //Mutators
